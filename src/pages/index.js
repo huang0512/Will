@@ -11,7 +11,6 @@ import Feedback from "../components/Feedback"
 import Confidence from "../components/Confidence"
 import Feature from "../components/Feature"
 import Pricing from "../components/Pricing"
-import FAQ from "../components/FAQ"
 import BlogSummary from "../components/BlogSummary"
 import AppLink from "../components/AppLink"
 import Footer from "../components/Footer"
@@ -37,8 +36,6 @@ export default () => (
     <Feature />
 
     <Pricing />
-
-    <FAQ />
 
     <BlogSummary />
 

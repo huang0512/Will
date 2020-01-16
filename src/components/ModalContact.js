@@ -45,12 +45,12 @@ export default ({ state, close }) => (
         display={"inline-block"}
         weight={"bold"}
         p={0.75}
-        bg={color.black}
+        bg={color.green}
         color={color.white}
         r={radius.sm}
         onClick={close}
       >
-        我已了解沟通方式
+        收到，我会支持你们哒！
       </Box>
     </ModalBox>
   </ModalFrame>
@@ -74,7 +74,7 @@ const conactData = [
   },
   {
     way: "网页在线客服",
-    detail: "请点击右下角进行沟通",
+    detail: "点击右下角进行沟通",
     recommend: true,
   },
 ]

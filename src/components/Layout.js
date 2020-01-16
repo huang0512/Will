@@ -2,10 +2,20 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { Helmet } from "react-helmet"
+import { Link } from "gatsby"
+import { arrowRight } from "./Hero"
 
 import "./clear.css"
 
-import { GlobalStyle, phone, desktop, Box, color } from "./Style"
+import { GlobalStyle, 
+         phone, 
+         desktop, 
+         Box, 
+         color,
+         SVG,
+         radius,
+         shadow,
+         Flex } from "./Style"
 
 export default ({ children }) => {
   return (
@@ -74,6 +84,92 @@ export const innerPadding = {
   xl: [2.5, 3.125],
 }
 
+export const SectionMargin = styled(Box)`
+  ${phone`
+    margin-top:${globalPhoneGap * 2}em;
+    margin-bottom:${globalPhoneGap * 2}em;
+  `}
+  ${desktop`
+    margin-top:${globalDesktopGap * 2}em;
+    margin-bottom:${globalDesktopGap * 2}em;
+  `}
+`
+
+export const ConstraintMaxWidth = styled(Box)`
+  @media (max-width: ${maxRowWidth}px) {
+    margin-left: ${globalPhoneGap}em;
+    margin-right: ${globalPhoneGap}em;
+  }
+  @media (min-width: ${maxRowWidth}px) {
+    max-width: ${maxRowWidth}px;
+    margin: 0 auto;
+  }
+`
+export const FractionGrid = styled(Box)`
+  ${phone`
+    display: grid;
+    gap: ${globalPhoneGap}em;
+    grid-template-columns: repeat(${p =>
+      p.column && p.column[0] ? p.column[0] : p.column}, 1fr);
+  `}
+  ${desktop`
+    display: grid;
+    gap: ${globalDesktopGap}em;
+    grid-template-columns: repeat(auto-fill, minmax(calc((${maxRowWidth}px - (${p =>
+    p.column &&
+    ((p.column[1] ? p.column[1] : p.column) - 1 + 2) *
+      globalDesktopGap}em)) / ${p =>
+    p.column && (p.column[1] ? p.column[1] : p.column)}), 1fr));
+  `}
+`
+export const QuarterGrid = styled(Box)`
+  ${phone`
+    display: grid;
+    gap: ${globalPhoneGap}em;
+    grid-template-columns: 1fr;
+  `}
+  ${desktop`
+    display: grid;
+    gap: ${globalDesktopGap}em;
+    grid-template-columns: repeat(4, 1fr);
+    > :nth-child(1n) {
+      grid-column: 1 / 2
+    }
+    > :nth-child(2) {
+      grid-column: 2 / 5
+    }
+  `}
+`
+
+export const blockAttrs = { lineColor: color.gray5 }
+
+export const Paragraph = props => {
+  return (
+    <Box>
+      <Box scale={props.type} mb={0.5} paragraph>
+        {props.title}
+      </Box>
+      <Box color={color.gray} paragraph>
+        {props.paragraph}
+      </Box>
+    </Box>
+  )
+}
+
+export const Tag = styled(Box).attrs(p => ({
+  scale: p.scale || p.scale === 0 ? p.scale : -1,
+}))`
+  display: inline-block;
+  line-height: 1;
+  padding: 0.5em;
+  border-radius: ${radius.sm};
+`
+export const MobileFlexAlignItemsStretch = styled(Flex)`
+  ${phone`
+    align-items: stretch;
+  `}
+`
+
 export const RowMargin = styled(Box)`
   ${phone`
     margin-top:${globalPhoneGap * 2}em;
@@ -106,7 +202,18 @@ export const RowMaxWidth = styled(Box)`
     margin: 0 auto;
   }
 `
-
+export const FeatureWithIconItem = props => {
+  return (
+    <Box>
+      <Box scale={3.75} mt={0.25} mb={0.5}>
+        <SVG svg={props.icon} stroke={props.iconColor} />
+      </Box>
+      <Box>
+        <Paragraph type={1} title={props.title} paragraph={props.description} />
+      </Box>
+    </Box>
+  )
+}
 export const ResponsiveGrid = styled(Box)`
   ${phone`
     display: grid;
@@ -153,6 +260,22 @@ export const Img = styled(Box)`
     width: auto;
   }
 `
+export const LinkBox = styled(Box).attrs(p => ({
+  bg: { hover: color.white },
+  b: { normal: color.gray5, hover: color.transparent },
+  s: { hover: shadow.lg },
+  r: p.r ? p.r : radius.lg,
+}))`
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 150ms;
+  `
+
+export const SectionTitle = styled(Box).attrs(p => ({
+  align: p.small ? "center" : null,
+  scale: p.small ? 1 : 2,
+  my: p.small ? 2 : 1.25,
+}))``
 
 // Iconn
 
@@ -187,3 +310,56 @@ export const minus = () => (
     />
   </svg>
 )
+
+export function formatDate(date) {
+  if (date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear()
+
+    if (month.length < 2) month = "0" + month
+    if (day.length < 2) day = "0" + day
+
+    return [year, month].join(" / ")
+  } else {
+    return null
+  }
+}
+
+export const Breadcrumbs = props => {
+  return (
+    <Box
+      pt={[globalPhoneGap, globalDesktopGap / 4]}
+      pb={[globalPhoneGap, globalDesktopGap]}
+    >
+      <ConstraintMaxWidth>
+        <MobileFlexAlignItemsStretch
+          aic
+          childFlex={"none"}
+          gap={[globalPhoneGap, globalDesktopGap]}
+        >
+          <Link to={props.link}>
+            <LinkBox r={radius.pill} p={innerPadding.sm}>
+              <Flex aic childFlex={"none"}>
+                <SVG
+                  svg={arrowRight}
+                  fill={color.ezessay}
+                  mr={0.75}
+                  style={{ transform: "rotateY(180deg)" }}
+                />
+                {props.label}
+              </Flex>
+            </LinkBox>
+          </Link>
+
+          {props.title && (
+            <Flex aic color={color.gray} paragraph>
+              {props.title}
+            </Flex>
+          )}
+        </MobileFlexAlignItemsStretch>
+      </ConstraintMaxWidth>
+    </Box>
+  )
+}

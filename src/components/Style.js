@@ -14,6 +14,22 @@ export const color = {
   divider: "hsl(0, 0%, 90%)",
   white: "hsl(0, 0%, 100%)",
   transparent: "transparent",
+  gray5: "hsl(242, 12%, 91%)",
+  gray: "hsl(242, 3%, 57%)",
+  gray2: "hsl(242, 3%, 69%)",
+  plum: "#A23F8C",
+  purple: "#734BDA",
+  gray3: "hsl(242, 5%, 79%)",
+  gray4: "hsl(242, 6%, 83%)",
+  gray5: "hsl(242, 12%, 91%)",
+  gray6: "hsl(242, 27%, 96%)",
+  gray2dark: "hsl(242, 2%, 39%)",
+  gray3dark: "hsl(242, 2%, 29%)",
+  gray4dark: "hsl(242, 2%, 23%)",
+  gray5dark: "hsl(242, 2%, 18%)",
+  gray6dark: "hsl(242, 4%, 11%)",
+  blockBG: "#F5F4F5",
+  plumLight: "#F4E1F0",
 }
 
 export const shadow = {
@@ -972,6 +988,22 @@ export const Icon = props => (
     <props.source />
   </StyledIcon>
 )
+export const SVG = props => (
+  <StyledSVG {...props}>
+    <props.svg />
+  </StyledSVG>
+)
+const StyledSVG = styled(Box)`
+  display: inline;
+  margin-right: ${p => p.withText && "0.35em"};
+  svg {
+    display: block;
+    fill: ${p => p.fill};
+    stroke: ${p => p.stroke};
+    height: ${p => (p.height ? p.height : 1) + "em"};
+    width: auto;
+  }
+`
 
 const StyledIcon = styled(Box)`
   display: inline;

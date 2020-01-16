@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import { Box, Flex, color, Icon, radius, shadow } from "./Style"
-import { Heading, globalPhoneGap, RowMaxWidth } from "./Layout"
-
+import { Box, Flex, color, Icon, radius, shadow,phone,desktop } from "./Style"
+import { Heading, globalPhoneGap, RowMaxWidth} from "./Layout"
+import { motion } from "framer-motion"
 import ModalCalculator from "./ModalCalculator"
 import ModalContact from "./ModalContact"
 
@@ -11,7 +11,7 @@ export default ({ white }) => {
   const [calculatorModalOpen, setCalculatorModalOpen] = useState(false)
 
   return (
-    <>
+    <> 
       <RowMaxWidth>
         <Flex jcsb aic gap={1.5} py={1.5}>
           <Heading>
@@ -21,14 +21,20 @@ export default ({ white }) => {
           </Heading>
 
           <Flex>
-            <Flex gap={1.5} aic>
-              <Link
-                to={"/blog/"}
+          <Flex gap={1.5}aic>
+                <Link to={"/"}
                 style={{ color: white ? color.white : color.black }}
-              >
-                写作指导
-              </Link>
-              <a
+                >首页</Link>
+                <Link to={"/essay/"}
+                style={{ color: white ? color.white : color.black }}
+                >定制写作</Link>
+                <Link to={"/blog/"}
+                style={{ color: white ? color.white : color.black }}
+                >最新资讯</Link>
+                <Link to={"/about/"}
+                style={{ color: white ? color.white : color.black }}
+                >关于我们</Link>
+                <a
                 href="https://ezessay.com/user/login/index.html"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -36,7 +42,7 @@ export default ({ white }) => {
               >
                 用户登录
               </a>
-            </Flex>
+              </Flex>
 
             <Flex
               z={100}

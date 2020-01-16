@@ -57,7 +57,7 @@ export default () => (
           align={"center"}
         >
           <a
-            href="https://drive.google.com/drive/folders/15NSjISzDIfP1BNmmgaeFBJdpOiFBy8Sd?usp=sharing"
+            href="/case"
             target="_blank"
             rel="noopener noreferrer"
           >
